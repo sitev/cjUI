@@ -43,18 +43,19 @@ enum BrushStyle {bsSolid = -1,	bsHorizontal = 1, bsVertical = 2, bsFDiagonal = 3
 #endif
 
 
-typedef Event<void(Object *sender)> NotifyEvent;
+typedef Closure<void(Object *sender)> NotifyEvent;
+
 #define nullEvent getEvent()
 typedef Object* (*CreateFunc)(List *params);
 
-typedef Event<void(Object *sender)> ClickEvent;
-typedef Event<void(Object* sender, MouseButton List, ShiftKeys shift, Point point)> MouseEvent;
-typedef Event<void(Object* sender, ShiftKeys shift, Point point)> MouseMoveEvent;
-typedef Event<void(Object* sender, int delta)> MouseWheelEvent;
-typedef Event<void(Object* sender, String &key)> KeyPressEvent;
-typedef Event<void(Object* sender, int &key, ShiftKeys shift)> KeyEvent;
-typedef Event<void(Object *sender, Rect rect)> PaintEvent;
-typedef Event<void(Object *sender, Size size)> ResizeEvent;
+typedef Closure<void(Object *sender)> ClickEvent;
+typedef Closure<void(Object* sender, MouseButton List, ShiftKeys shift, Point point)> MouseEvent;
+typedef Closure<void(Object* sender, ShiftKeys shift, Point point)> MouseMoveEvent;
+typedef Closure<void(Object* sender, int delta)> MouseWheelEvent;
+typedef Closure<void(Object* sender, String &key)> KeyPressEvent;
+typedef Closure<void(Object* sender, int &key, ShiftKeys shift)> KeyEvent;
+typedef Closure<void(Object *sender, Rect rect)> PaintEvent;
+typedef Closure<void(Object *sender, Size size)> ResizeEvent;
 
 
 /*

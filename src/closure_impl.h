@@ -12,7 +12,7 @@
 template <class F>
 struct Closure;
 
-#define Event Closure
+///#define Event Closure
 
 //forward declaration of specialization 
 template <TEMPLATE_PARAM_LIST>
