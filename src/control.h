@@ -150,11 +150,16 @@ public:
 	virtual void releasePaintRect() {}
 
 
+	virtual bool getVisible();
+	virtual void setVisible(bool value);
+
 	virtual void setColor(Color c);
 	virtual void setColor(real r, real g, real b);
 	virtual void setPenWidth(int value);
 	virtual void setPenStyle(PenStyle value);
 	virtual void setBrushStyle(BrushStyle value);
+
+	
 
 	virtual Point getAbsoluteOffset();
 	virtual Point getAbsolutePos();

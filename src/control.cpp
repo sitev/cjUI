@@ -188,6 +188,15 @@ void Control::changeRect(real x1, real y1, real x2, real y2)
   rect.size.h += y2 - y1;
   set(rect);
 }
+
+bool Control::getVisible() {
+	return visible;
+}
+
+void Control::setVisible(bool value) {
+	visible = value;
+}
+
 void Control::setColor(Color c) {
 	color = c;
 }
