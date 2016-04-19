@@ -728,7 +728,15 @@ void Control::mouseDown(MouseButton button, ShiftKeys shift, Point point) {
 	isDown = true;
 	String s = getObjectName();
 
-	if (onMouseDown) onMouseDown(this, button, shift, point);
+	if (onMouseDown) 
+		onMouseDown(this, button, shift, point);
+	else {
+		int count = UControls_GetCount();
+		for (int i = 0; i < count; i++)	{
+			Control *c = UControls_GetItem(i);
+			c->mouseDown(button, shift, point);
+		}
+	}
 }
 void Control::mouseMove(ShiftKeys shift, Point point) {
 	isInto = point.x >= 0 && point.y >= 0 && point.x <= getWidth() && point.y <= getHeight();
