@@ -137,7 +137,7 @@ void Control::paintOuter(Rect rect) {
 	for (int i = 0; i < count; i++)
 	{
 		Control *C = UControls_GetItem(i);
-		String S = C->getClassName();
+		string S = C->getClassName().to_string();
 		String sName = C->getObjectName();
 		Rect R = *C;
 		if (C != NULL) {
