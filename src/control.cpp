@@ -734,16 +734,14 @@ void Control::mouseDown(MouseButton button, ShiftKeys shift, Point point) {
 		int count = UControls_GetCount();
 		for (int i = 0; i < count; i++)	{
 			Control *c = UControls_GetItem(i);
-			c->mouseDown(button, shift, point);
+			if (c->into(point))
+				c->mouseDown(button, shift, point);
 		}
 	}
 }
 void Control::mouseMove(ShiftKeys shift, Point point) {
 	isInto = point.x >= 0 && point.y >= 0 && point.x <= getWidth() && point.y <= getHeight();
 	if (onMouseMove) onMouseMove(this, shift, point);
-
-	if (this->hint == "123")
-		int a = 1;
 
 	canvas->hint = this->hint;
 	canvas->hintPos = this->getAbsolutePos();
@@ -753,9 +751,17 @@ void Control::mouseMove(ShiftKeys shift, Point point) {
 }
 void Control::mouseUp(MouseButton button, ShiftKeys shift, Point point) {
 	isDown = false;
-	if (onMouseUp) onMouseUp(this, button, shift, point);
-	if (point.x >= 0 && point.y >= 0 && point.x <= getWidth() && point.y <= getHeight())
-		click();
+	if (onMouseUp) 
+		onMouseUp(this, button, shift, point);
+	else {
+		int count = UControls_GetCount();
+		for (int i = 0; i < count; i++)	{
+			Control *c = UControls_GetItem(i);
+			if (c->into(point))
+				c->mouseUp(button, shift, point);
+		}
+	}
+
 	isInto = false;
 }
 void Control::click() {
