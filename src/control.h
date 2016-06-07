@@ -3,6 +3,8 @@
 #include "cjUI.h"
 #include "closure.h"
 
+#define CONTROL_CLASS
+
 namespace cj {
 
 const int maxNormPntCnt = 36;

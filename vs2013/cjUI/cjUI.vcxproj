@@ -82,6 +82,7 @@
     <ClCompile Include="..\..\src\font.cpp" />
     <ClCompile Include="..\..\src\gtypes.cpp" />
     <ClCompile Include="..\..\src\rect.cpp" />
+    <ClCompile Include="..\..\src\sprite.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\canvas.h" />
@@ -92,6 +93,7 @@
     <ClInclude Include="..\..\src\font.h" />
     <ClInclude Include="..\..\src\gtypes.h" />
     <ClInclude Include="..\..\src\rect.h" />
+    <ClInclude Include="..\..\src\sprite.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

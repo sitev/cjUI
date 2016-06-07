@@ -6,8 +6,10 @@
 #include "font.h"
 #include "control.h"
 #include "canvas.h"
-
 #include "closure.h"
+#include "sprite.h"
+
+class Control;
 
 namespace cj{
 

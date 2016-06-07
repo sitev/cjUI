@@ -1,5 +1,7 @@
 #pragma once
 
+#include "control.h"
+
 namespace cj {
 
 enum CanvasType {cnvNone, cnvGDI, cnvWeb, cnvOpenGL};
@@ -30,6 +32,7 @@ public:
 	virtual Bitmap* createBitmap() { return NULL; }
 	virtual void polyline(Rect rect, List *lstPoint) {}
 	virtual void polygon(Rect rect, List *lstPoint) {}
+	virtual void sprite(Rect rect) {}
 
 
 	virtual void grid(Rect rect) {}
