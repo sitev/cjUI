@@ -7,6 +7,7 @@
 #include "control.h"
 #include "canvas.h"
 #include "closure.h"
+#include "texture.h"
 #include "sprite.h"
 
 class Control;

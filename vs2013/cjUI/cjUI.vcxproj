@@ -83,6 +83,7 @@
     <ClCompile Include="..\..\src\gtypes.cpp" />
     <ClCompile Include="..\..\src\rect.cpp" />
     <ClCompile Include="..\..\src\sprite.cpp" />
+    <ClCompile Include="..\..\src\texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\canvas.h" />
@@ -94,6 +95,7 @@
     <ClInclude Include="..\..\src\gtypes.h" />
     <ClInclude Include="..\..\src\rect.h" />
     <ClInclude Include="..\..\src\sprite.h" />
+    <ClInclude Include="..\..\src\texture.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
