@@ -1,11 +1,13 @@
 #pragma once
 
+#define TEXTURE_CLASS
+
 namespace cj {
 
 class Texture {
 public:
 	Texture();
-	virtual void loadFromFile();
+	virtual bool loadFromFile(String fileName) = 0;
 };
 
 }

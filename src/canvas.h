@@ -1,6 +1,7 @@
 #pragma once
 
 #include "control.h"
+#include "sprite.h"
 
 namespace cj {
 
@@ -32,7 +33,7 @@ public:
 	virtual Bitmap* createBitmap() { return NULL; }
 	virtual void polyline(Rect rect, List *lstPoint) {}
 	virtual void polygon(Rect rect, List *lstPoint) {}
-	virtual void sprite(Rect rect) {}
+	virtual void sprite(Rect rect, Sprite &sprite) {}
 
 
 	virtual void grid(Rect rect) {}
