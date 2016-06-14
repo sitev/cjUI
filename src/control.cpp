@@ -1,5 +1,4 @@
-#include "cj.h"
-#include "cjUI.h"
+#include "control.h"
 
 namespace cj {
 

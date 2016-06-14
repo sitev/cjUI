@@ -1,6 +1,8 @@
 #pragma once
 
 #include "control.h"
+#include "cj.h"
+#include "cjUI.h"
 
 namespace cj {
 
