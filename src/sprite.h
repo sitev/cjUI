@@ -6,8 +6,6 @@ namespace cj {
 
 #ifdef CONTROL_CLASS
 #ifdef TEXTURE_CLASS
-	//#ifndef SPRITE_CLASS
-//#define SPRITE_CLASS
 
 	class Sprite : public Control {
 	public:
@@ -19,7 +17,6 @@ namespace cj {
 		virtual void setPosition(int x, int y) = 0;
 	};
 
-//#endif
 #endif
 #endif
 
