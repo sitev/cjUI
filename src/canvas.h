@@ -1,12 +1,6 @@
 #pragma once
 
 #include "control.h"
-<<<<<<< HEAD
-#include "cj.h"
-#include "cjUI.h"
-=======
-#include "sprite.h"
->>>>>>> 815c99aecd70ee4388fe2079576bf40f651533ce
 
 namespace cj {
 

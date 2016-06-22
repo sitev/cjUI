@@ -1,5 +1,5 @@
-#include "canvas.h"
-
+#include "cj.h"
+#include "cjUI.h"
 
 namespace cj {
 
