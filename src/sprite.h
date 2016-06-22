@@ -5,19 +5,19 @@
 namespace cj {
 
 #ifdef CONTROL_CLASS
-//#ifndef SPRITE_CLASS
-//#define SPRITE_CLASS
-
-#include "cjUI.h"
+#ifdef TEXTURE_CLASS
 
 	class Sprite : public Control {
-	protected:
 	public:
 		Sprite(Control *owner);
 		virtual void paint(Rect rect);
+
+		virtual void setTexture(Texture &tx) = 0;
+		virtual void setTextureRect(Rect rect) = 0;
+		virtual void setPosition(int x, int y) = 0;
 	};
 
-//#endif
+#endif
 #endif
 
 }

@@ -1,8 +1,12 @@
 #pragma once
 
 #include "control.h"
+<<<<<<< HEAD
 #include "cj.h"
 #include "cjUI.h"
+=======
+#include "sprite.h"
+>>>>>>> 815c99aecd70ee4388fe2079576bf40f651533ce
 
 namespace cj {
 
@@ -34,7 +38,7 @@ public:
 	virtual Bitmap* createBitmap() { return NULL; }
 	virtual void polyline(Rect rect, List *lstPoint) {}
 	virtual void polygon(Rect rect, List *lstPoint) {}
-	virtual void sprite(Rect rect) {}
+	virtual void sprite(Rect rect, Sprite &sprite) {}
 
 
 	virtual void grid(Rect rect) {}

@@ -6,7 +6,7 @@ Sprite::Sprite(Control *owner) : Control(owner) {
 }
 
 void Sprite::paint(Rect rect) {
-	canvas->sprite(rect);
+	canvas->sprite(rect, *this);
 }
 
 }
