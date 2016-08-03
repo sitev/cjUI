@@ -20,6 +20,13 @@ void PointerMap::insert(String name, Object* value) {
 	pars.insert(std::pair<string, Object*>(name.to_string(), value));
 }
 
+void PointerMap::set(String name, Object* value) {
+	//Object *a = getValue(name);
+	//if (a == NULL) add(name, value);
+	//else 
+		pars[name.to_string()] = value;
+}
+
 void PointerMap::clear() {
 	pars.clear();
 }
@@ -27,6 +34,9 @@ int PointerMap::getCount() {
 	return pars.size();
 }
 Object* PointerMap::getValue(String name) {
+	string z = name.to_string();
+	map<string, Object*>::iterator it = pars.find(z);
+	if (it == pars.end()) return NULL;
 	return pars[name.to_string()];
 }
 
@@ -42,11 +52,20 @@ Object* PointerMap::getValue(int index) {
 	return iter->second;
 }
 
+SpriteFrame::SpriteFrame(int x, int y, int w, int h) {
+	this->x = x;
+	this->y = y;
+	this->w = w;
+	this->h = h;
+}
+
+
 
 Texture::Texture() {
 }
 
 bool Texture::loadConfig(String fileName) {
+	pmClass.clear();
 	File *f = new File(fileName, "rb");
 
 	while (!f->eof()) {
@@ -57,21 +76,25 @@ bool Texture::loadConfig(String fileName) {
 		String name = s.subString(0, pos);
 		string z = name.to_string();
 
-		String clss, layer, state, cadr;
-		getCLSC(name, clss, layer, state, cadr);
+		String clss, /*layer, */state, frame;
+		getCSF(name, clss, /*layer, */state, frame);
 
-		/* test
-		string s_name = name.to_string(), s_clss = clss.to_string(), s_layer = layer.to_string(), 
-			s_state = state.to_string(), s_cadr = cadr.to_string();
-		printf("name = %s\n", s_name.c_str());
-		printf("class = %s\n", s_clss.c_str());
-		printf("layer = %s\n", s_layer.c_str());
-		printf("state = %s\n", s_state.c_str());
-		printf("cadr = %s\n", s_cadr.c_str());
-		*/
+		z = clss.to_string();
+		z = state.to_string();
+		SpriteClass *sc = (SpriteClass*)pmClass.getValue(clss);
+		if (sc == NULL) {
+			sc = new SpriteClass();
+			sc->name = clss;
+			pmClass.set(clss, sc);
+		}
+		SpriteState *ss = (SpriteState*)sc->pmState.getValue(state);
+		if (ss == NULL) {
+			ss = new SpriteState();
+			ss->name = state;
+			sc->pmState.set(state, ss);
+		}
 
 		s = s.subString(pos + 3);
-		z = s.to_string();
 
 		//x
 		pos = s.getPos(" ");
@@ -93,7 +116,12 @@ bool Texture::loadConfig(String fileName) {
 		int h = s.subString(0, pos).toInt();
 		s = s.subString(pos + 1);
 
-		//break;
+		SpriteFrame *sf = (SpriteFrame*)ss->pmFrame.getValue(frame);
+		if (sf == NULL) {
+			sf = new SpriteFrame(x, y, w, h);
+			sf->name = frame;
+			ss->pmFrame.set(frame, sf);
+		}
 	}
 
 	delete f;
@@ -101,11 +129,11 @@ bool Texture::loadConfig(String fileName) {
 	return true;
 }
 
-void Texture::getCLSC(String s, String &clss, String &layer, String &state, String &cadr) {
+void Texture::getCSF(String s, String &clss, /*String &layer, */String &state, String &frame) {
 	//cadr
 	int pos = s.getPos("-");
-	if (pos >= 0) cadr = s.subString(pos + 1);
-	else cadr = "";
+	if (pos >= 0) frame = s.subString(pos + 1);
+	else frame = "0";
 	s = s.subString(0, pos);
 
 	//class
@@ -113,7 +141,7 @@ void Texture::getCLSC(String s, String &clss, String &layer, String &state, Stri
 	if (pos >= 0) clss = s.subString(0, pos);
 	else {
 		clss = s;
-		layer = "";
+		//layer = "";
 		state = "";
 		return;
 	}
@@ -124,17 +152,17 @@ void Texture::getCLSC(String s, String &clss, String &layer, String &state, Stri
 	if (pos >= 0) state = s.subString(pos + 1);
 	else {
 		state = s;
-		layer = "";
+		//layer = "";
 		return;
 	}
 	s = s.subString(0, pos);
 
-	//layer
-	layer = s;
+	//layer. if LEXX want layer
+	//layer = s;
 
 
 	string z = s.to_string();
-	z = cadr.to_string();
+	z = frame.to_string();
 }
 
 
