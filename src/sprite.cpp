@@ -24,13 +24,16 @@ void Sprite::paint(Rect rect) {
 			}
 		}
 	}
+	//Rect ar = getAbsoluteRect();
+
+	canvas->texture = texture;
 	canvas->sprite(rect, *this);
 }
 
 void Sprite::setClass(String value) {
-	if (tx == nullptr) return;
+	if (texture == nullptr) return;
 	
-	sc = (SpriteClass*)tx->pmClass.getValue(value);
+	sc = (SpriteClass*)texture->pmClass.getValue(value);
 }
 
 void Sprite::setState(String value) {

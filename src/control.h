@@ -112,6 +112,7 @@ public:
 
 	bool visible, enabled;
 	Color color;
+	Texture *texture = nullptr;
 	int penWidth;
 	PenStyle penStyle; 
 	BrushStyle brushStyle;
@@ -124,6 +125,7 @@ public:
 	bool stretch;
 	bool isScissor;
 	String hint;
+	int tag = 0;
 
 	Control(Control *owner);
 	virtual ~Control();

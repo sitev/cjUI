@@ -25,7 +25,13 @@ void Color::set(real r, real g, real b)
 	this->g = g;
 	this->b = b;
 }
-void Color::set256(byte r, byte g, byte b)
+void Color::get256(uchar &r, uchar &g, uchar &b) {
+	real max = 255;
+	r = this->r * max;
+	g = this->g * max;
+	b = this->b * max;
+}
+void Color::set256(uchar r, uchar g, uchar b)
 {
 	real max = 255;
 	this->r = (real)r / max;

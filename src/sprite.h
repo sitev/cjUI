@@ -9,7 +9,6 @@ namespace cj {
 
 	class Sprite : public Control {
 	protected:
-		Texture *tx = NULL;
 		SpriteClass *sc = NULL;
 		SpriteState *ss = NULL;
 		SpriteFrame *sf = NULL;

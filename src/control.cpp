@@ -45,7 +45,7 @@ Control::Control(Control *owner) : Rect() {
 	client = this;
 	visible = true;
 	jointed = false;
-	stretch = true;
+	stretch = false;
 	isScissor = true;
 	canvas = NULL;
 	hint = "";
@@ -85,6 +85,7 @@ void Control::recalc(Rect rect) {
 void Control::paintControl(Rect rect) {
 	if (!visible) return;
 	recalc(rect);
+	///onBeforePaint();
 	paintBegin(rect);
 	paint(rect);
 	paintInner(rect);
@@ -94,7 +95,7 @@ void Control::paintControl(Rect rect) {
 	paintTrackBegin(rect);
 	paintTrack(rect);
 	paintTrackEnd(rect);
-
+	
 	canvas->setPaintRect(rect);
 	paintEnd(rect);
 }
@@ -137,9 +138,6 @@ void Control::paintOuter(Rect rect) {
 	for (int i = 0; i < count; i++)
 	{
 		Control *C = UControls_GetItem(i);
-		string S = C->getClassName().to_string();
-		String sName = C->getObjectName();
-		Rect R = *C;
 		if (C != NULL) {
 			C->paintControl(rect);
 		}
@@ -562,7 +560,7 @@ void Control::inverseJointAll() {
 bool Control::into(Point point) {
 	real X = point.x;
 	real Y = point.y;
-	Rect R = *this;
+	Rect R = this->getAbsoluteRect();
 	R.correct();
 	if (R.getX1() <= X && R.getY1() <= Y && R.getX2() >= X && R.getY2() >= Y) return true;
 	return false;
@@ -734,6 +732,7 @@ void Control::mouseDown(MouseButton button, ShiftKeys shift, Point point) {
 		int count = UControls_GetCount();
 		for (int i = 0; i < count; i++)	{
 			Control *c = UControls_GetItem(i);
+			int tag = c->tag;
 			if (c->into(point))
 				c->mouseDown(button, shift, point);
 		}
@@ -787,6 +786,8 @@ void Control::setPoints(Rect rect, Rect oldRect) {
 	}
 }
 void Control::setChilds(Rect rect, Rect oldRect) {
+	return; //Работает не правильно, надо исправить...
+
 	int count = JControls_GetCount();
 	for (int i = 0; i < count; i++)	{
 		Control *c = JControls_GetItem(i);

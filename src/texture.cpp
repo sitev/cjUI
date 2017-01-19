@@ -1,5 +1,8 @@
 #include "cjUI.h"
 
+#include <SFML/Graphics.hpp>
+#include <SFML/System/String.hpp>
+
 namespace cj {
 
 //--------------------------------------------------------------------------------------------------
@@ -68,16 +71,29 @@ bool Texture::loadConfig(String fileName) {
 	pmClass.clear();
 	File *f = new File(fileName, "rb");
 
-	while (!f->eof()) {
+	int counter = 0;
+	while (true) {
+		int tick0 = GetTickCount();
+
+		if (f->eof()) break;
+
+		int tick1 = GetTickCount();
+
 		String s;
 		f->readLine(s);
+
+		int tick2 = GetTickCount();
 		
-		int pos = s.getPos(" = ");
+		int pos = s.find(" = ");
 		String name = s.subString(0, pos);
-		string z = name.to_string();
+		string z;// = name.to_string();
+
+		int tick3 = GetTickCount();
 
 		String clss, /*layer, */state, frame;
 		getCSF(name, clss, /*layer, */state, frame);
+
+		int tick4 = GetTickCount();
 
 		z = clss.to_string();
 		z = state.to_string();
@@ -87,6 +103,9 @@ bool Texture::loadConfig(String fileName) {
 			sc->name = clss;
 			pmClass.set(clss, sc);
 		}
+
+		int tick5 = GetTickCount();
+
 		SpriteState *ss = (SpriteState*)sc->pmState.getValue(state);
 		if (ss == NULL) {
 			ss = new SpriteState();
@@ -94,27 +113,39 @@ bool Texture::loadConfig(String fileName) {
 			sc->pmState.set(state, ss);
 		}
 
+		int tick6 = GetTickCount();
+
 		s = s.subString(pos + 3);
+
+		int tick7 = GetTickCount();
 
 		//x
 		pos = s.getPos(" ");
 		int x = s.subString(0, pos).toInt();
 		s = s.subString(pos + 1);
 
+		int tick8 = GetTickCount();
+
 		//y
 		pos = s.getPos(" ");
 		int y = s.subString(0, pos).toInt();
 		s = s.subString(pos + 1);
+
+		int tick9 = GetTickCount();
 
 		//w
 		pos = s.getPos(" ");
 		int w = s.subString(0, pos).toInt();
 		s = s.subString(pos + 1);
 
+		int tick10 = GetTickCount();
+
 		//h
 		pos = s.getPos(" ");
 		int h = s.subString(0, pos).toInt();
 		s = s.subString(pos + 1);
+
+		int tick11 = GetTickCount();
 
 		SpriteFrame *sf = (SpriteFrame*)ss->pmFrame.getValue(frame);
 		if (sf == NULL) {
@@ -122,6 +153,16 @@ bool Texture::loadConfig(String fileName) {
 			sf->name = frame;
 			ss->pmFrame.set(frame, sf);
 		}
+
+		int tick12 = GetTickCount();
+
+		counter++;
+		
+		if (counter % 50 == 0)
+			printf("%d: %d %d %d %d %d %d %d %d %d %d %d %d = %d\n", counter, 
+				tick1 - tick0, tick2 - tick1, tick3 - tick2, tick4 - tick3, tick5 - tick4, tick6 - tick5, tick7 - tick6,
+				tick8 - tick7, tick9 - tick8, tick10 - tick9, tick11 - tick10, tick12 - tick11, tick12 - tick1);
+			
 	}
 
 	delete f;
@@ -131,13 +172,13 @@ bool Texture::loadConfig(String fileName) {
 
 void Texture::getCSF(String s, String &clss, /*String &layer, */String &state, String &frame) {
 	//cadr
-	int pos = s.getPos("-");
+	int pos = s.find("-");
 	if (pos >= 0) frame = s.subString(pos + 1);
 	else frame = "0";
 	s = s.subString(0, pos);
 
 	//class
-	pos = s.getPos("_");
+	pos = s.find("_");
 	if (pos >= 0) clss = s.subString(0, pos);
 	else {
 		clss = s;
@@ -148,7 +189,7 @@ void Texture::getCSF(String s, String &clss, /*String &layer, */String &state, S
 	s = s.subString(pos + 1);
 
 	//state
-	pos = s.getPos("_");
+	pos = s.find("_");
 	if (pos >= 0) state = s.subString(pos + 1);
 	else {
 		state = s;
@@ -161,8 +202,8 @@ void Texture::getCSF(String s, String &clss, /*String &layer, */String &state, S
 	//layer = s;
 
 
-	string z = s.to_string();
-	z = frame.to_string();
+	//string z = s.to_string();
+	//z = frame.to_string();
 }
 
 
